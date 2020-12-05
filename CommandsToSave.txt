@@ -1,0 +1,5 @@
+mvn exec:java -Dexec.mainClass="nicebank.AtmServer"
+
+mvn clean compile exec:java
+
+mvn dependency:tree command
