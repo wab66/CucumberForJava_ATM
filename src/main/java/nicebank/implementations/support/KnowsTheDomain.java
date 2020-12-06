@@ -3,12 +3,13 @@ package nicebank.implementations.support;
 import nicebank.Account;
 import nicebank.CashSlot;
 import nicebank.AutomatedTeller;
+import nicebank.implementations.ITeller;
 
 // Helper class
 public class KnowsTheDomain {
     private Account myAccount;
     private CashSlot cashSlot;
-    private AutomatedTeller automatedTeller;
+    private ITeller teller;
 
     public Account getMyAccount() {
         if (myAccount == null) {
@@ -24,11 +25,11 @@ public class KnowsTheDomain {
         return cashSlot;
     }
 
-    public AutomatedTeller getTeller() {
-        if (automatedTeller == null) {
-            //teller = new Teller(cashSlot);
-            automatedTeller = new AutomatedTeller(cashSlot);
+    public ITeller getTeller() {
+        if (teller == null) {
+            teller = new AtmUserInterface();
         }
-        return automatedTeller;
+        return teller;
     }
+
 }

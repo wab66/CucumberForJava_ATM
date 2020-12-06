@@ -9,5 +9,5 @@ Feature: Cash Withdrawal
     Examples:
       | deposit | request | dispense | fromAccount | accountBalance |
       | 100.00  | 20.00   | 20.00    | savings     | 80.00          |
-      | 333.00  | 50.00   | 50.00    | savings     | 283.00         |
+#      | 333.00  | 50.00   | 50.00    | savings     | 283.00         |
 

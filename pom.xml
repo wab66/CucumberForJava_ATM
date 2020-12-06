@@ -37,8 +37,14 @@
             <version>1.0.6</version>
             <scope>provided</scope>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-server -->
+        <dependency>
+            <groupId>org.seleniumhq.selenium</groupId>
+            <artifactId>selenium-server</artifactId>
+            <version>4.0.0-alpha-2</version>
+        </dependency>
 
-<!--        rc01a - 03/12/2020 - -->
+        <!--        rc01a - 03/12/2020 - -->
         <!-- https://mvnrepository.com/artifact/javax.servlet/javax.servlet-api -->
         <dependency>
             <groupId>javax.servlet</groupId>
@@ -89,6 +95,8 @@
                     <target>1.8</target>
                 </configuration>
             </plugin>
+
+<!--            rc01d - removed.  Trying to get 'mvn clean test' to execute the tests (features)-->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>

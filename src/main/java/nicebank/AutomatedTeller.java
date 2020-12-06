@@ -15,7 +15,7 @@ public class AutomatedTeller implements ITeller {
     }
 
     @Override
-    public void withDrawFrom(Account account, float amount) {
+    public void withdrawFrom(Account account, float amount) {
         account.debit(amount);
         cashSlot.dispense(amount);
     }

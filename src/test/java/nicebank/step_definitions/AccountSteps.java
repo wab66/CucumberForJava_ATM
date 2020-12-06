@@ -19,8 +19,6 @@ public class AccountSteps {
 
 	@Given("^my (.*?) account has been credited (\\d+\\.\\d\\d)?")
 	public void myAccountHasBeenCredited(String account, float creditAmount) {
-		//Account account = new Account();
-		//account.deposit(depositAmount);
 		helper.getMyAccount().credit(creditAmount);
 		Assert.assertEquals("Incorrect account balance", creditAmount, helper.getMyAccount().getAccountBalance(), del);
 	}
