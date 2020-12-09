@@ -9,9 +9,9 @@ import io.cucumber.junit.CucumberOptions;
 import org.junit.runner.RunWith;
 
 @RunWith(Cucumber.class)
-@CucumberOptions(plugin = {"pretty"},
+@CucumberOptions(plugin = {"pretty", "html:target/junit-reports/out.html"},
         //snippets = CucumberOptions.SnippetType.CAMELCASE,
-        //dryRun = true,
+        dryRun = false,
         //glue = {"src/test/java/nicebank/step_definitions"},
         features = {"src/test/resource/features"}
 )

@@ -10,4 +10,4 @@ Feature: Checkout
     Examples:
       | deposit | from    | to      | transfer |
       | 1000.00 | savings | cheque  | 40.00    |
-      | 2000.00 | current | savings | 80.00    |
+      #| 2000.00 | current | savings | 80.00    |

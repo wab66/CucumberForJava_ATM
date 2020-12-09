@@ -1,6 +1,5 @@
 package nicebank;
 
-
 import nicebank.implementations.ITeller;
 
 public class AutomatedTeller implements ITeller {

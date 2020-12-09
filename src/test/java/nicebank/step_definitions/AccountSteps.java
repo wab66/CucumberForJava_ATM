@@ -25,7 +25,8 @@ public class AccountSteps {
 
 	@When("^I transfer (\\d+\\.\\d\\d) from my (.*?) Account to my (.*?) Account?")
 	public void iTransferFromMyAccountToMyAccount(float transferAmount, String fromAccount, String toAccount) {
-	    throw new io.cucumber.java.PendingException();
+	    //throw new io.cucumber.java.PendingException();
+		System.out.println("ToDo: When - iTransferFromMyAccountToMyAccount");
 	}
 
 	// ToDo: The following 2 could be just on Then - "^the (.*?) Account will be (\\d+\\.\\d\\d)?"
@@ -33,18 +34,21 @@ public class AccountSteps {
 	@Then("^the (.*?) Account will be (\\d+\\.\\d\\d) more?")
 	public void theChequeAccountWillBeMore(String fromAccount, float amount) {
 		// Write code here that turns the phrase above into concrete actions
-		throw new io.cucumber.java.PendingException();
+		//throw new io.cucumber.java.PendingException();
+		System.out.println("ToDo: Then - theChequeAccountWillBeMore");
 	}
 
     @Then("^the (.*?) Account will be (\\d+\\.\\d\\d) less?")
     public void theAccountWillBeLess(String fromAccount, float amount) {
         // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
+        //throw new io.cucumber.java.PendingException();
+		System.out.println("ToDo: Then - theAccountWillBeLess");
     }
 
-	// Cash Withdrawl -
+	// Cash Withdrawal -
 	@When("^I withdraw (\\d+\\.\\d\\d)$")
-	public void iWithdraw(float withdrawAmount) throws Throwable {
+	public void
+	iWithdraw(float withdrawAmount) throws Throwable {
 		AutomatedTeller automatedTeller = new AutomatedTeller(helper.getCashSlot());
 		helper.getTeller().withdrawFrom(helper.getMyAccount(), withdrawAmount);
 	}
@@ -60,4 +64,4 @@ public class AccountSteps {
     }
 }
 
-// mvn exec:java -Dexec.mainClass =" nicebank.AtmServer"
+// mvn exec:java -Dexec.mainClass =" nicebank.implementations.server.AtmServer"
