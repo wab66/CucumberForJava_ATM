@@ -15,6 +15,7 @@ public class AutomatedTeller implements ITeller {
 
     @Override
     public void withdrawFrom(Account account, float amount) {
+        System.out.println("[AutomatedTeller] > withdrawFrom() - first version of this method > otgher is in AtmUserInterface");
         account.debit(amount);
         cashSlot.dispense(amount);
     }

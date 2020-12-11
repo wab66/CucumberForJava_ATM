@@ -16,18 +16,19 @@ public class AtmServer
         context.setContextPath("/");
         server.setHandler(context);
 
-        //context.addServlet(new ServletHolder( new WithdrawalServlet()),"/withdraw");
         context.addServlet(new ServletHolder( new AtmServlet()),"/*");
-
+        context.addServlet(new ServletHolder( new WithdrawalServlet()),"/withdraw");
+        System.out.println("========================= [AtmServer] > [constructor] > Servlet's added");
     }
 
     public void start() throws Exception {
         server.start();
-        System.out.println("Listening on " + server.getURI());
+        System.out.println("========================= [AtmServer] > [start] > Listening on " + server.getURI());
     }
 
     public void stop() throws Exception {
         server.stop();
+        System.out.println("========================= [AtmServer] > [stop] > Listening on " + server.getURI());
     }
 
     public static void main(String[] args) throws Exception {

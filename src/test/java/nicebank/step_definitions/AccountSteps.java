@@ -15,6 +15,7 @@ public class AccountSteps {
 
 	public AccountSteps() {
 		helper = new KnowsTheDomain();
+		System.out.println("Knows The Domain - loaded - check webriver");
 	}
 
 	@Given("^my (.*?) account has been credited (\\d+\\.\\d\\d)?")
