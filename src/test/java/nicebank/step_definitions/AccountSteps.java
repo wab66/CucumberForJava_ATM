@@ -30,6 +30,16 @@ public class AccountSteps {
 		System.out.println("ToDo: When - iTransferFromMyAccountToMyAccount");
 	}
 
+	// Cash Withdrawal -
+	@When("^I withdraw (\\d+\\.\\d\\d)$")
+	public void
+	iWithdraw(float withdrawAmount) throws Throwable {
+		AutomatedTeller automatedTeller = new AutomatedTeller(helper.getCashSlot());
+		helper.getTeller().withdrawFrom(helper.getMyAccount(), withdrawAmount);
+		automatedTeller.withdrawFrom(helper.getMyAccount(), withdrawAmount);
+        System.out.println("debug");
+	}
+
 	// ToDo: The following 2 could be just on Then - "^the (.*?) Account will be (\\d+\\.\\d\\d)?"
 
 	@Then("^the (.*?) Account will be (\\d+\\.\\d\\d) more?")
@@ -39,21 +49,12 @@ public class AccountSteps {
 		System.out.println("ToDo: Then - theChequeAccountWillBeMore");
 	}
 
-    @Then("^the (.*?) Account will be (\\d+\\.\\d\\d) less?")
-    public void theAccountWillBeLess(String fromAccount, float amount) {
-        // Write code here that turns the phrase above into concrete actions
-        //throw new io.cucumber.java.PendingException();
+	@Then("^the (.*?) Account will be (\\d+\\.\\d\\d) less?")
+	public void theAccountWillBeLess(String fromAccount, float amount) {
+		// Write code here that turns the phrase above into concrete actions
+		//throw new io.cucumber.java.PendingException();
 		System.out.println("ToDo: Then - theAccountWillBeLess");
-    }
-
-	// Cash Withdrawal -
-	@When("^I withdraw (\\d+\\.\\d\\d)$")
-	public void
-	iWithdraw(float withdrawAmount) throws Throwable {
-		AutomatedTeller automatedTeller = new AutomatedTeller(helper.getCashSlot());
-		helper.getTeller().withdrawFrom(helper.getMyAccount(), withdrawAmount);
 	}
-	
 	@Then("^(\\d+\\.\\d\\d) should be dispensed$")
 	public void shouldBeDispensed(float dispenseAmount) throws Throwable {
 		Assert.assertEquals("Incorrect amount dispensed.", dispenseAmount, helper.getCashSlot().getContents(),del);

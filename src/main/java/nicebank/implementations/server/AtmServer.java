@@ -1,5 +1,7 @@
 package nicebank.implementations.server;
 
+import nicebank.Account;
+import nicebank.CashSlot;
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.servlet.ServletContextHandler;
 import org.eclipse.jetty.servlet.ServletHolder;
@@ -8,16 +10,15 @@ public class AtmServer
 {
     private final Server server;
 
-    public AtmServer(int port) {
-        //server = new Server(9988);
+    public AtmServer(int port, CashSlot cashSlot, Account account) {
         server = new Server(port);
 
         ServletContextHandler context = new ServletContextHandler(ServletContextHandler.SESSIONS);
         context.setContextPath("/");
         server.setHandler(context);
 
-        context.addServlet(new ServletHolder( new AtmServlet()),"/*");
-        context.addServlet(new ServletHolder( new WithdrawalServlet()),"/withdraw");
+        context.addServlet(new ServletHolder(new WithdrawalServlet(cashSlot, account)),"/withdraw");
+        context.addServlet(new ServletHolder(new AtmServlet()),"/");
         System.out.println("========================= [AtmServer] > [constructor] > Servlet's added");
     }
 
@@ -32,6 +33,6 @@ public class AtmServer
     }
 
     public static void main(String[] args) throws Exception {
-        new AtmServer(9988).start();
+        new AtmServer(9988, new CashSlot(), new Account()).start();
     }
 }
