@@ -1,52 +1,53 @@
 package nicebank;
 
-import nicebank.implementations.support.KnowsTheDomain;
-
 public class Account {
 
-	private double accountBalance;
-	private String accountType;
-//	private Locale locale;
-//	private Currency currency;
-	// Domain helper for sharing within the Step Definition
-	/*public class AccountSteps{
-		KnowsTheDomain helper;
+	private TransactionQueue queue = new TransactionQueue();
 
-	public AccountSteps() {
-		helper = new KnowsTheDomain();
-	}
-}*/
-
-	public Account() {
-		//this.currency = Currency.getInstance(Locale.UK);
-		this.accountBalance = 0;
-		this.accountType = "";
+	public void credit(Money amount) {
+		queue.write("+" + amount);
 	}
 
-	public Account(double accountBalance, String accountType) {
-		//this.currency = Currency.getInstance(Locale.UK);
-		this.accountBalance = accountBalance;
-		this.accountType = accountType;
+	public void debit(int amount) {
+	//rc01m - public void debit(int dollars) {
+		Money money = new Money(amount, 0);
+		queue.write("-" + money);
 	}
 
-	public void credit(double depositAmount){
-		accountBalance += depositAmount;
-		System.out.println("Account has been credited " + depositAmount  + ",  Account Balance " +
-				" is " + accountBalance );
+	public Money getAccountBalance() {
+		return BalanceStore.getBalance();
 	}
 
-	public void debit(double withdrawAmount){
-		accountBalance -= withdrawAmount;
-		System.out.println("Account has been debited " + withdrawAmount  + ",  Account Balance " +
-				" is " + accountBalance );
-	}
-
-	public double getAccountBalance() {
-		return accountBalance;
-	}
-
-	public String getAccountType() {
-		return accountType;
-	}
+	// Updating this now to use a message queue instead, with a BalanceStore (this stores the balances)
+//	private double accountBalance;
+//	private String accountType;
+//
+//	public Account() {
+//		//this.currency = Currency.getInstance(Locale.UK);
+//		this.accountBalance = 0;
+//		this.accountType = "";
+//	}
+//
+//	public Account(double accountBalance, String accountType) {
+//		//this.currency = Currency.getInstance(Locale.UK);
+//		this.accountBalance = accountBalance;
+//		this.accountType = accountType;
+//	}
+//
+//	public void credit(double depositAmount){
+//		accountBalance += depositAmount;
+//	}
+//
+//	public void debit(double withdrawAmount){
+//		accountBalance -= withdrawAmount;
+//	}
+//
+//	public double getAccountBalance() {
+//		return accountBalance;
+//	}
+//
+//	public String getAccountType() {
+//		return accountType;
+//	}
 }
 

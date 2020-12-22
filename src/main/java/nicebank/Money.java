@@ -1,45 +1,78 @@
 package nicebank;
 
-import java.util.Currency;
-import java.util.Locale;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
-public final class Money {
-
-    private final float amount;
-    private Locale locale;
-    private final Currency currency;
+public class Money {
+    private final int dollars;
+    private final int cents;
 
     public Money() {
-        this.currency = Currency.getInstance(Locale.UK);
-        this.amount = 0;
+        this.dollars = 0;
+        this.cents = 0;
     }
 
-    public Money(float amount) {
-        this.currency = Currency.getInstance(Locale.UK);
-        this.amount = amount;
+    public Money(int dollars, int cents) {
+        this.dollars = dollars;
+        this.cents = cents;
     }
 
-    public Money(Locale locale, float amount) {
-        this.locale = locale;
-        this.currency = Currency.getInstance(locale);
-        this.amount = amount;
+    public Money(String amount) {
+        Pattern pattern = Pattern.compile("^[^\\d]*([\\d]+)\\.([\\d][\\d])$");
+        Matcher matcher = pattern.matcher(amount);
+
+        matcher.find();
+        this.dollars = Integer.parseInt(matcher.group(1));
+        this.cents = Integer.parseInt(matcher.group(2));
     }
 
-    public Money(String amountStr) {
-        this.currency = Currency.getInstance(Locale.UK);
-        //this.amount = Double.parseDouble(amountStr);
-        this.amount = Float.parseFloat(amountStr);
+    public int getDollars() {
+        return dollars;
     }
 
-    public float getAmount() {
-        return amount;
+    public int getCents() {
+        return cents;
     }
 
-    public Locale getLocale() {
-        return locale;
+    public Money add(Money amount){
+        int newCents = cents + amount.getCents();
+        int newDollars = dollars + amount.getDollars();
+
+        if (newCents >= 100){
+            newCents -= 100;
+            newDollars++;
+        }
+
+        return new Money(newDollars, newCents);
     }
 
-    public Currency getCurrency() {
-        return currency;
+    public Money minus(Money amount){
+        int newCents = cents - amount.getCents();
+        int newDollars = dollars - amount.getDollars();
+
+        if (newCents < 0){
+            newCents += 100;
+            newDollars--;
+        }
+
+        return new Money(newDollars, newCents);
+    }
+
+    @Override
+    public boolean equals(Object other){
+        boolean equal = false;
+
+        if (other instanceof Money){
+            Money otherMoney = (Money)other;
+            equal = (this.getDollars() == otherMoney.getDollars()
+                    && this.getCents() == otherMoney.getCents());
+        }
+
+        return equal;
+    }
+
+    @Override
+    public String toString() {
+        return String.format("$%01d.%02d", this.getDollars(), this.getCents());
     }
 }

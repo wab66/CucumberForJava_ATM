@@ -1,7 +1,5 @@
-package nicebank.implementations.server;
+package nicebank;
 
-import nicebank.Account;
-import nicebank.CashSlot;
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.servlet.ServletContextHandler;
 import org.eclipse.jetty.servlet.ServletHolder;
@@ -17,8 +15,9 @@ public class AtmServer
         context.setContextPath("/");
         server.setHandler(context);
 
-        context.addServlet(new ServletHolder(new WithdrawalServlet(cashSlot, account)),"/withdraw");
-        context.addServlet(new ServletHolder(new AtmServlet()),"/");
+        //context.addServlet(new ServletHolder(new GetHomePageServlet()),"/homepage");
+        context.addServlet(new ServletHolder(new PostWithdrawalServlet(cashSlot, account)),"/withdraw");
+        context.addServlet(new ServletHolder(new GetWithdrawalServlet()),"/");
         System.out.println("========================= [AtmServer] > [constructor] > Servlet's added");
     }
 

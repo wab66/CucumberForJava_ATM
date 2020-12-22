@@ -1,13 +1,12 @@
-package nicebank.step_definitions;
+package step_definitions;
 
 import io.cucumber.java.After;
 //import io.cucumber.java.Scenario;
 import io.cucumber.java.Scenario;
+import support.KnowsTheDomain;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriverException;
-import org.openqa.selenium.support.events.EventFiringWebDriver;
-import nicebank.implementations.support.KnowsTheDomain;
 
 public class WebDriverHooks {
 

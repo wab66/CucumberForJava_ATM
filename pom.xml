@@ -58,6 +58,13 @@
             <artifactId>picocontainer</artifactId>
             <version>2.15</version>
         </dependency>
+<!--        rc01a - 15/12/2020 14:18-->
+        <!-- https://mvnrepository.com/artifact/io.cucumber/cucumber-html -->
+        <dependency>
+            <groupId>io.cucumber</groupId>
+            <artifactId>cucumber-html</artifactId>
+            <version>0.2.7</version>
+        </dependency>
 
         <!--        rc01a - 03/12/2020 - -->
         <!-- https://mvnrepository.com/artifact/javax.servlet/javax.servlet-api -->
@@ -96,6 +103,18 @@
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
             <version>2.0.0-alpha1</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/commons-io/commons-io -->
+        <dependency>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+            <version>2.8.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>2.12.0</version>
+            <scope>test</scope>
         </dependency>
     </dependencies>
 

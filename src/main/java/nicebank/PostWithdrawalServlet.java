@@ -1,4 +1,4 @@
-package nicebank.implementations.server;
+package nicebank;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
@@ -7,16 +7,16 @@ import jakarta.servlet.http.HttpServletResponse;
 import nicebank.Account;
 import nicebank.AutomatedTeller;
 import nicebank.CashSlot;
-import nicebank.implementations.ITeller;
+import nicebank.ITeller;
 
 import java.io.IOException;
 
-public class WithdrawalServlet extends HttpServlet {
+public class PostWithdrawalServlet extends HttpServlet {
 
     private CashSlot cashSlot;
     private Account account;
 
-    public WithdrawalServlet(CashSlot cashSlot, Account account) {
+    public PostWithdrawalServlet(CashSlot cashSlot, Account account) {
         this.cashSlot = cashSlot;
         this.account = account;
     }

@@ -1,30 +1,30 @@
-package nicebank;
+package transforms;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class TransformerMoney {
+public class MyMoneyTransformer {
     private int pounds;
     private int pence;
     private String moneyStr;
 
-    public TransformerMoney() {
+    public MyMoneyTransformer() {
         this.pounds = 0;
         this.pence = 0;
     }
 
-    public TransformerMoney(int pounds, int pence) {
+    public MyMoneyTransformer(int pounds, int pence) {
         this.pounds = pounds;
         this.pence = pence;
     }
 
-    public TransformerMoney(String amount) {
+    public MyMoneyTransformer(String amount) {
         Pattern pattern = Pattern.compile("^[\\d]*([\\d+])\\.([\\d][\\d])$");
         Matcher matcher = pattern.matcher(amount);
         matcher.find();
         this.pounds = Integer.parseInt(matcher.group(1));
         this.pence = Integer.parseInt(matcher.group(2));
-        getMoney();
+        //getMoney();
     }
 
     public int getPounds() {
@@ -35,16 +35,7 @@ public class TransformerMoney {
         return pence;
     }
 
-    public double getMoney() {
-        Money money = new Money(moneyStr);
-        return money.getAmount();
-    }
-
-/*
-
-    public double getMoneyAmount(){
+    public double getMoney(){
         return (this.pounds + (pence/100));
     }
-*/
-
 }

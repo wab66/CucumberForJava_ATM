@@ -1,4 +1,3 @@
-package nicebank.step_definitions;
 // NB: We may need to place this in a folder under: test/java/RunnerFile.txt
 //     May need to create a Package like src/test/java/com.company/stepdefinitions and
 //                                       src/test/java/com.company/another_folder/RunnerFile.txt

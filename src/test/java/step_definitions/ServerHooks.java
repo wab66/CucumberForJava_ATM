@@ -1,10 +1,10 @@
-package nicebank.step_definitions;
+package step_definitions;
 
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
 import io.cucumber.java.Scenario;
-import nicebank.implementations.server.AtmServer;
-import nicebank.implementations.support.KnowsTheDomain;
+import nicebank.AtmServer;
+import support.KnowsTheDomain;
 
 
 public class ServerHooks {

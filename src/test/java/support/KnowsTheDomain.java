@@ -1,12 +1,11 @@
-package nicebank.implementations.support;
+package support;
 
 import nicebank.Account;
 import nicebank.CashSlot;
-import nicebank.implementations.ITeller;
+import nicebank.ITeller;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.events.EventFiringWebDriver;
 
-// Helper class
 public class KnowsTheDomain {
     private Account myAccount;
     private CashSlot cashSlot;
@@ -40,5 +39,4 @@ public class KnowsTheDomain {
         }
         return webDriver;
     }
-
 }

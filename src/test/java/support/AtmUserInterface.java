@@ -1,10 +1,10 @@
-package nicebank.implementations.support;
+package support;
 
+import nicebank.Account;
+import nicebank.ITeller;
 import org.openqa.selenium.By;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.events.EventFiringWebDriver;
-import nicebank.Account;
-import nicebank.implementations.ITeller;
 
 public class AtmUserInterface implements ITeller {
 
@@ -16,7 +16,7 @@ public class AtmUserInterface implements ITeller {
     }
 
     @Override
-    public void withdrawFrom(Account account, float dollars) {
+    public void withdrawFrom(Account account, int dollars) {
         System.out.println("[AtmUserInterface] > withdrawFrom() - second version of this method > other is in AutomatedTeller");
         try {
             webDriver.get("http://localhost:9988");
