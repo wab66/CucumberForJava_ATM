@@ -7,13 +7,13 @@ public class TransactionProcessor {
         do {
             String message = queue.read();
 
-            // Deliberately slow it down
-//            try {
-//                Thread.sleep(1000);
-//                System.out.println("+++++++++++++++++++++++++++++[TransactionProcessor] > [process]: Thread.sleep: 1000ms");
-//            } catch (InterruptedException e) {
-//
-//            }
+            // Deliberately slow it down - so feature will work
+            try {
+                Thread.sleep(4000);
+                System.out.println("+++++++++++++++++++++++++++++[TransactionProcessor] > [process]: Thread.sleep: 1000ms");
+            } catch (InterruptedException e) {
+
+            }
 
             if (message.length() > 0) {
                 System.out.println("+++++++++++++++++++++++++++++[TransactionProcessor] > [process]: Message found: " + message);

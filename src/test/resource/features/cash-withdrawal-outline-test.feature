@@ -1,4 +1,4 @@
-Feature: Cash Withdrawal
+Feature: Feature - Cash Withdrawal
 
   Scenario Outline: Successful withdrawal from an account in credit
     Given my <fromAccount> account has been credited <deposit>
