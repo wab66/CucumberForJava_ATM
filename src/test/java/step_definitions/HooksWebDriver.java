@@ -8,12 +8,12 @@ import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriverException;
 
-public class WebDriverHooks {
+public class HooksWebDriver {
 
     private KnowsTheDomain helper;
     //Scenario scenario;
 
-    public WebDriverHooks(KnowsTheDomain helper) {
+    public HooksWebDriver(KnowsTheDomain helper) {
         this.helper = helper;
     }
 

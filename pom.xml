@@ -11,6 +11,7 @@
     <properties>
         <project.build.sourceEncoding>UTF8</project.build.sourceEncoding>
         <mainClass>com.enterprise.mainPacket.MainApp</mainClass>
+        <activejdbc.version>1.4.1</activejdbc.version>
         <cucumber.version>6.1.2</cucumber.version>
     </properties>
 
@@ -51,7 +52,6 @@
             <version>${cucumber.version}</version>
             <scope>test</scope>
         </dependency>
-
         <!-- https://mvnrepository.com/artifact/org.picocontainer/picocontainer -->
         <dependency>
             <groupId>org.picocontainer</groupId>
@@ -65,7 +65,6 @@
             <artifactId>cucumber-html</artifactId>
             <version>0.2.7</version>
         </dependency>
-
         <!--        rc01a - 03/12/2020 - -->
         <!-- https://mvnrepository.com/artifact/javax.servlet/javax.servlet-api -->
         <dependency>
@@ -74,7 +73,6 @@
             <version>4.0.1</version>
             <scope>provided</scope>
         </dependency>
-
         <!-- https://mvnrepository.com/artifact/javax.money/money-api -->
         <dependency>
             <groupId>javax.money</groupId>
@@ -116,6 +114,18 @@
             <version>2.12.0</version>
             <scope>test</scope>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/org.javalite/activejdbc -->
+        <dependency>
+            <groupId>org.javalite</groupId>
+            <artifactId>activejdbc</artifactId>
+            <version>${activejdbc.version}</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>8.0.22</version>
+        </dependency>
     </dependencies>
 
     <build>
@@ -142,6 +152,39 @@
                     <argLine>-Dfile.encoding=UTF-8</argLine>
                     <useFile>false</useFile>
                 </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.javalite</groupId>
+                <artifactId>activejdbc-instrumentation</artifactId>
+                <version>${activejdbc.version}</version>
+                <executions>
+                    <execution>
+                        <phase>process-classes</phase>
+                        <goals>
+                            <goal>instrument</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.liquibase</groupId>
+                <artifactId>liquibase-maven-plugin</artifactId>
+                <version>3.0.5</version>
+                <configuration>
+                    <changeLogFile>src/main/resources/bank_schema.xml</changeLogFile>
+                    <driver>com.mysql.cj.jdbc.Driver</driver>
+                    <url>jdbc:mysql://localhost/bank</url>
+                    <username>teller</username>
+                    <password>password</password>
+                </configuration>
+                <executions>
+                    <execution>
+                        <phase>process-resources</phase>
+                        <goals>
+                            <goal>update</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>

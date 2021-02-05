@@ -7,21 +7,23 @@ import nicebank.AtmServer;
 import support.KnowsTheDomain;
 
 
-public class ServerHooks {
+public class HooksServer {
 
-    //public static final int PORT = 8887;
-    public static final int PORT = 9988;
+    public static final int PORT = 8887;
+    //public static final int PORT = 9988;
     private AtmServer server;
     private KnowsTheDomain helper;
 
-    public ServerHooks(KnowsTheDomain helper) {
+    public HooksServer(KnowsTheDomain helper) {
         this.helper = helper;
     }
 
     @Before
     public void startServer() throws Exception {
-        System.out.println("*********** [ServerHooks] > [@Before] > [startServer] >: About to start the scenario.");
+        System.out.println("*********** [ServerHooks] > [@Before] > [startServer()] >: 1) About to create new ATMServer (server) - (helper.getMyAccount())");
         server = new AtmServer( PORT, helper.getCashSlot(), helper.getMyAccount());
+        System.out.println("*********** [ServerHooks] > [@Before] > [startServer()] >: 2) Created new ATMServer (server): " + server);
+        //server = new AtmServer(PORT);
         server.start();
     }
 

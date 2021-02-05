@@ -7,14 +7,13 @@ public class AutomatedTeller implements ITeller {
         this.cashSlot = cashSlot;
     }
 
-    public CashSlot getCashSlot() {
-        return cashSlot;
-    }
-
     @Override
     public void withdrawFrom(Account account, int amount) {
-        System.out.println("[AutomatedTeller] > withdrawFrom() - first version of this method > otgher is in AtmUserInterface");
+        System.out.println("1=========================== <Debit and Dispense> [AutomatedTeller] > (@OVERRIDE > ITeller) > withdrawFrom(): " +
+                " CashSlot contents before we dispense: " + cashSlot.getContents());
         account.debit(amount);
         cashSlot.dispense(amount);
+        System.out.println("2=========================== <Debit and Dispense> [AutomatedTeller] > (@OVERRIDE > ITeller) > withdrawFrom() - Account: " +
+                account + ", the amount of: " + amount + ", CashSlot contents amount: " + cashSlot.getContents());
     }
 }

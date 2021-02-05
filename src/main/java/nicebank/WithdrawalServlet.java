@@ -11,12 +11,12 @@ import nicebank.ITeller;
 
 import java.io.IOException;
 
-public class PostWithdrawalServlet extends HttpServlet {
+public class WithdrawalServlet extends HttpServlet {
 
     private CashSlot cashSlot;
     private Account account;
 
-    public PostWithdrawalServlet(CashSlot cashSlot, Account account) {
+    public WithdrawalServlet(CashSlot cashSlot, Account account) {
         this.cashSlot = cashSlot;
         this.account = account;
     }
@@ -24,6 +24,8 @@ public class PostWithdrawalServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
         ITeller teller = new AutomatedTeller(cashSlot);
         int amount = Integer.parseInt(request.getParameter("amount"));
+        System.out.println("###########################[WithdrawalServlet] > doPost() > withdraw money: " +
+                amount + ", from cashslot: " + cashSlot + ", for Account: " + account);
         teller.withdrawFrom(account, amount);
 
         response.setContentType("text/html");
@@ -31,7 +33,6 @@ public class PostWithdrawalServlet extends HttpServlet {
         response.getWriter().println(
                 "<html><head><title>Nice Bank ATM</title></head>" +
                         "<body>Please take your $" + amount + "</body></html>");
-        System.out.println("Take money: " + amount);
+        System.out.println("#####################################[WithdrawalServlet] > doPost(" + account + ", " + amount + ") -> Take money: " + amount);
     }
 }
-

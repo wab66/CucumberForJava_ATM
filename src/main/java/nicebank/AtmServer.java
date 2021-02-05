@@ -3,6 +3,7 @@ package nicebank;
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.servlet.ServletContextHandler;
 import org.eclipse.jetty.servlet.ServletHolder;
+import org.javalite.activejdbc.Base;
 
 public class AtmServer
 {
@@ -16,8 +17,8 @@ public class AtmServer
         server.setHandler(context);
 
         //context.addServlet(new ServletHolder(new GetHomePageServlet()),"/homepage");
-        context.addServlet(new ServletHolder(new PostWithdrawalServlet(cashSlot, account)),"/withdraw");
-        context.addServlet(new ServletHolder(new GetWithdrawalServlet()),"/");
+        context.addServlet(new ServletHolder(new WithdrawalServlet(cashSlot, account)),"/withdraw");
+        context.addServlet(new ServletHolder(new AtmServlet()),"/");
         System.out.println("========================= [AtmServer] > [constructor] > Servlet's added");
     }
 
@@ -32,6 +33,11 @@ public class AtmServer
     }
 
     public static void main(String[] args) throws Exception {
+        System.out.println("££££££££££££££ [AtmServer] > main() > Base.open(mysql stuff).  Then - new AtmServer(port=9988)");
+        Base.open(
+                "com.mysql.jdbc.Driver",
+                "jdbc:mysql://localhost/bank",
+                "teller", "password");
         new AtmServer(9988, new CashSlot(), new Account()).start();
     }
 }

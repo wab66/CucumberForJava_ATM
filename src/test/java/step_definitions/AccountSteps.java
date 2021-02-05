@@ -28,8 +28,8 @@ public class AccountSteps {
 //--------------------------------------------------------------------------------------------------------------------
 //	Desc:
 //	The ATM posts messages about transactions into the Transaction Queue. The Transaction Processor reads messages off
-//	that queue, reads the existing balance from the Balance Store, and then stores the updated balance back
-//	in the Balance Store. The ATM reads the account balance from the Balance Store.
+//	that queue, reads the existing balance from the MySQL db(old way - Balance Store), and then stores the updated balance
+//	back in the mySQL db (Balance Store). The ATM reads the account balance from the mySQL db (Balance Store).
 //--------------------------------------------------------------------------------------------------------------------
 
 	@ParameterType(name = "deposit", value = "\\d+\\.\\d+")
@@ -41,17 +41,17 @@ public class AccountSteps {
 	//@Given("^my (.*?) account has been credited {deposit}?")
 	public void myAccountHasBeenCredited(String account, Money deposit) throws Throwable {
 	//public void myAccountHasBeenCredited(String account, @Transform(MoneyConverter.class) Money creditAmount) throws Throwable {
-		helper.getMyAccount().credit(deposit);
-		Assert.assertFalse("Incorrect account balance, expected: " + deposit + ", but actual was: " + helper.getMyAccount().getAccountBalance(), (deposit == helper.getMyAccount().getAccountBalance()));
+        System.out.println("################################ <Step - @GIVEN> - Account should be there: " + helper.getMyAccount());
+        helper.getMyAccount().credit(deposit);
+		System.out.println("################################ <Step - @GIVEN> - Account and amount to add has been written to Msg Queue - wait pit to be processed. " + helper.getMyAccount());
+		//Money dbAccountBalance = helper.getMyAccount().getAccountBalance();
+		//Assert.assertTrue("Incorrect account balance, expected: " + deposit + ", but actual was: " + dbAccountBalance, (deposit == dbAccountBalance));
 	}
 
 	@When("^I withdraw (\\d+)$")
-	public void
-	iWithdraw(int withdrawAmount){
-		AutomatedTeller automatedTeller = new AutomatedTeller(helper.getCashSlot());
+	public void iWithdraw(int withdrawAmount){
 		helper.getTeller().withdrawFrom(helper.getMyAccount(), withdrawAmount);
-		automatedTeller.withdrawFrom(helper.getMyAccount(), withdrawAmount);
-		System.out.println("debug");
+		System.out.println("[@When] > Withdraw amount from teller, teller puts into cashslot: " + helper.getCashSlot().getContents());
 	}
 
 	@When("^I transfer (\\d+\\.\\d\\d) from my (.*?) Account to my (.*?) Account?")
@@ -64,8 +64,9 @@ public class AccountSteps {
 
 	@Then("^(\\d+) should be dispensed$")
 	public void shouldBeDispensed(int dispenseAmount) {
-		int actualDispense = helper.getCashSlot().getContents();
-		Assert.assertTrue("Incorrect amount ( + dispenseAmount + ) dispensed.", dispenseAmount == actualDispense);
+		int actualDispenseAmount = helper.getCashSlot().getContents();
+		Assert.assertTrue("Incorrect amount (" + dispenseAmount + ") dispensed. Actual amount was: (" +
+				actualDispenseAmount + ").", dispenseAmount == actualDispenseAmount);
 	}
 
 	@Then("^the (.*?) Account will be (\\d+\\.\\d\\d) more?")
@@ -95,11 +96,12 @@ public class AccountSteps {
 			timeoutMilliSecs -= pollIntervalMilliSecs;
 		}
 
-		int actualAmount = helper.getMyAccount().getAccountBalance().getDollars();
-        Assert.assertFalse("Expected account balance: " + accountBalance +
+		//int actualAmount = helper.getMyAccount().getAccountBalance().getDollars();
+		Money actualAccountBalance = helper.getMyAccount().getAccountBalance();
+        Assert.assertTrue("Expected account balance: " + accountBalance +
 				", does not match actual account balance: " +
-				helper.getMyAccount().getAccountBalance() +
-				".", (accountBalance == helper.getMyAccount().getAccountBalance()));
+				actualAccountBalance +
+				".", (accountBalance == actualAccountBalance));
     }
 }
 

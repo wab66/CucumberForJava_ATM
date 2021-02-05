@@ -12,3 +12,8 @@ Feature: Feature - Cash Withdrawal
       | 100.00  | 20      | 20       | savings     | 80.00          |
 #      | 333.00  | 50      | 50       | savings     | 283.00         |
 
+# Database version:
+  # KnowsTheDomain - constructor will setup Base.open() and delete all records.
+  # TransactionProcessor -  will read the Messages file to see if any msgs.  Then process the message.
+  #   It looks for the first record then either adds or subtracts from that account.  But we get the
+  #   Instrumentation error.

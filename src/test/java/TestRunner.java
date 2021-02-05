@@ -9,7 +9,7 @@ import org.junit.runner.RunWith;
 
 @RunWith(Cucumber.class)
 @CucumberOptions(plugin = {"pretty", "html:target/junit-reports/out.html"},
-        //snippets = CucumberOptions.SnippetType.CAMELCASE,
+        snippets = CucumberOptions.SnippetType.CAMELCASE,
         dryRun = false,
         //glue = {"src/test/java/nicebank/step_definitions"},
         features = {"src/test/resource/features"}

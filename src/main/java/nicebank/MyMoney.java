@@ -3,6 +3,7 @@ package nicebank;
 import java.util.Currency;
 import java.util.Locale;
 
+// My version - not used
 public class MyMoney {
     private final float amount;
     private Locale locale;

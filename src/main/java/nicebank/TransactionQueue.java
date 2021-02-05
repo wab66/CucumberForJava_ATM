@@ -9,7 +9,7 @@ import java.util.Scanner;
 
 public class TransactionQueue {
     private static String MESSAGES_FOLDER = "./messages";
-    private static String MESSAGE_FILE_PATH = "%s/account_%03d.txt";
+    private static String MESSAGE_FILE_PATH = "%s/account_%03d.txt";  // rc0199m - changed path to include "account_"
     private int nextId = 1;
 
     public static void clear() {
@@ -22,6 +22,7 @@ public class TransactionQueue {
     }
 
     public void write(String transaction){
+        System.out.println(">>>>>>>>>>>>>>>>> [TransactionQueue] > write() > Start");
         String messageFilePath = String.format(MESSAGE_FILE_PATH, MESSAGES_FOLDER, nextId);
 
         PrintWriter writer = null;
@@ -35,6 +36,7 @@ public class TransactionQueue {
 
         writer.println(transaction);
         writer.close();
+        System.out.println(">>>>>>>>>>>>>>>>> [TransactionQueue] > write() > write transaction: " + transaction + ", to queue (file).");
 
         nextId++;
     }
@@ -47,7 +49,9 @@ public class TransactionQueue {
         String message = "";
 
         // If message file found
+        //System.out.println(">>>>>>>>>>>>>>>>> [TransactionQueue] > read() > Read from queue (file).");
         if (messages != null && messages.length > 0){
+            //System.out.println(">>>>>>>>>>>>>>>>> [TransactionQueue] > read() > Message found: " + messages);
             Arrays.sort(messages, new Comparator<File>() {
                 @Override
                 public int compare(File f1, File f2) {
@@ -77,6 +81,7 @@ public class TransactionQueue {
             }
         }
 
+        //System.out.println(">>>>>>>>>>>>>>>>> [TransactionQueue] > read() > Message to return: " + message);
         return message;
     }
 }
