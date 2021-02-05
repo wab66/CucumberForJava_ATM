@@ -53,8 +53,8 @@ public class KnowsTheDomain {
                 System.out.println("[KnowsTheDomain] > getMyAccount > Account not added - already exists: " + e);
             }
         }
-        System.out.println("[KnowsTheDomain] > getMyAccount() > Getting account: " +
-                myAccount + ", Get myAccount Bal: " + myAccount.getAccountBalance());
+//        System.out.println("[KnowsTheDomain] > getMyAccount() > Getting account: " +
+//                myAccount + ", Get myAccount Bal: " + myAccount.getAccountBalance());
         return myAccount;
     }
 

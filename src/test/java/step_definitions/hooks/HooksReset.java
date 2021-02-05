@@ -1,9 +1,7 @@
-package step_definitions;
+package step_definitions.hooks;
 
-import io.cucumber.java.After;
 import io.cucumber.java.Before;
 import nicebank.TransactionQueue;
-import org.javalite.activejdbc.Base;
 
 public class HooksReset {
     @Before

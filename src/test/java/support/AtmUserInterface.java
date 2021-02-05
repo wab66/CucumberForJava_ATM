@@ -3,9 +3,8 @@ package support;
 import nicebank.Account;
 import nicebank.ITeller;
 import org.openqa.selenium.By;
-import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.events.EventFiringWebDriver;
-import step_definitions.HooksServer;
+import step_definitions.hooks.*;
 
 public class AtmUserInterface implements ITeller {
 

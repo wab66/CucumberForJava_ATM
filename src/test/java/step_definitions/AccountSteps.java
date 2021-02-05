@@ -47,12 +47,14 @@ public class AccountSteps {
 		//Money dbAccountBalance = helper.getMyAccount().getAccountBalance();
 		//Assert.assertTrue("Incorrect account balance, expected: " + deposit + ", but actual was: " + dbAccountBalance, (deposit == dbAccountBalance));
 	}
+/*
 
 	@When("^I withdraw (\\d+)$")
 	public void iWithdraw(int withdrawAmount){
 		helper.getTeller().withdrawFrom(helper.getMyAccount(), withdrawAmount);
 		System.out.println("[@When] > Withdraw amount from teller, teller puts into cashslot: " + helper.getCashSlot().getContents());
 	}
+*/
 
 	@When("^I transfer (\\d+\\.\\d\\d) from my (.*?) Account to my (.*?) Account?")
 	public void iTransferFromMyAccountToMyAccount(float transferAmount, String fromAccount, String toAccount) {
@@ -61,6 +63,7 @@ public class AccountSteps {
 	}
 
 	// ToDo: The following 2 could be just on Then - "^the (.*?) Account will be (\\d+\\.\\d\\d)?"
+/*
 
 	@Then("^(\\d+) should be dispensed$")
 	public void shouldBeDispensed(int dispenseAmount) {
@@ -68,6 +71,7 @@ public class AccountSteps {
 		Assert.assertTrue("Incorrect amount (" + dispenseAmount + ") dispensed. Actual amount was: (" +
 				actualDispenseAmount + ").", dispenseAmount == actualDispenseAmount);
 	}
+*/
 
 	@Then("^the (.*?) Account will be (\\d+\\.\\d\\d) more?")
 	public void theChequeAccountWillBeMore(String fromAccount, float amount) {
