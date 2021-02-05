@@ -11,13 +11,17 @@ public class Account extends Model{
 
 	public Account(int number) {
 		//rc02d this.queue = queue;
+		System.out.println("[Account] > Account() > 1. before setInteger()");
 		setInteger("number", number);
-		setString("balance", "100.00");
+		setString("balance", "0.00");
+		System.out.println("[Account] > Account() > 2. after setInteger() -> Account Count: " +
+				Account.count() + ", Account Table name : " + Account.getTableName() +
+				", Account first record :" + Account.findFirst("number = ?", 1234));
 	}
 
 	public void credit(Money amount) {
 		//rc02: queue.write("+" + amount);
-		System.out.println("##################### [Account] > credit() > Amount to be credited (write to Message Queue (" + amount.toString() + ") +  to account (" + getNumber());
+		System.out.println("##################### [Account] > credit() > Amount to be credited (write to Message Queue (" + amount.toString() + ") +  to account (" + getNumber() + ")");
 		queue.write("+" + amount.toString() + "," + getNumber());
 		//queue.write("+" );
 	}
@@ -36,7 +40,9 @@ public class Account extends Model{
 
 	// Use DB
 	public Money getAccountBalance() {
+		System.out.println("[Account] > getAccountBalance() > about to do a 'refresh()'.  Current Balance before refresh: "+ getString("balance"));
 		refresh();
+		System.out.println("[Account] > getAccountBalance() > now get account balance");
 		return new Money(getString("balance"));
 	}
 

@@ -9,7 +9,7 @@ public class TellerSteps {
     double del = 0;
     KnowsTheDomain helper;
 
-    public TellerSteps() {
-        helper = new KnowsTheDomain();
+    public TellerSteps(KnowsTheDomain helper) {
+        this.helper = helper;
     }
 }

@@ -23,18 +23,19 @@ public class KnowsTheDomain {
                     "jdbc:mysql://localhost/bank",
                     "teller", "password");
             //System.out.println("1 --------------------- [KnowsTheDomain] > Constructor() -> 1a. Base.open - has connection created?: " + Base.hasConnection() + " Connection: " + Base.connection());
-            System.out.println("1 --------------------- [KnowsTheDomain] > Constructor() -> 1b. Base.open() - Account Table Count: " +
+            System.out.println("[KnowsTheDomain] > Constructor() -> 1. Base.open() - Base.Account Table Count: " +
                     Base.count("bank.accounts"));
-
         }
         else {
             //System.out.println("2 --------------------- [KnowsTheDomain] > Constructor() -> 2a. Base already open - has connection created?: " + Base.hasConnection() + " Connection: " + Base.connection());
-            System.out.println("2 --------------------- [KnowsTheDomain] > Constructor() -> 2b. Base already open - Account Table Count: " +
+            System.out.println("[KnowsTheDomain] > Constructor() -> 2b. Base already open - Account Table Count: " +
                     Base.count("bank.accounts"));
         }
 
         try {
+            System.out.println("[KnowsTheDomain] > constructor > 1. before - Account.deleteAll(): " + Base.count("bank.accounts"));
             Account.deleteAll();
+            System.out.println("[KnowsTheDomain] > constructor > 2. after - Account.deleteAll(): " + Base.count("bank.accounts"));
         }catch(Exception e){
             System.out.println("[KnowsTheDomain] > constructor > Account.deleteAll() - exception: " + e);
         }
@@ -44,15 +45,16 @@ public class KnowsTheDomain {
     public Account getMyAccount() {
         if (myAccount == null) {
             myAccount = new Account(1234);
-            System.out.println("1.b £££££££££££££££££[KnowsTheDomain] > getMyAccount > (after) Create account if myAccount == null (not instantiated - but might be in DB)");
+            System.out.println("[KnowsTheDomain] > getMyAccount > (after) Create account if myAccount == null (not instantiated - but might be in DB)");
             try{
                 myAccount.saveIt();
-                System.out.println("1.c £££££££££££££££££[KnowsTheDomain] > getMyAccount > (after) myAccount.saveIt()");
+                System.out.println("[KnowsTheDomain] > getMyAccount > (after) myAccount.saveIt()");
             } catch(DBException e){
                 System.out.println("[KnowsTheDomain] > getMyAccount > Account not added - already exists: " + e);
             }
         }
-        System.out.println("££££££££££££££££££££[KnowsTheDomain] > getMyAccount() > Getting account: " + myAccount);
+        System.out.println("[KnowsTheDomain] > getMyAccount() > Getting account: " +
+                myAccount + ", Get myAccount Bal: " + myAccount.getAccountBalance());
         return myAccount;
     }
 

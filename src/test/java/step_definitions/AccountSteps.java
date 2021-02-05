@@ -16,8 +16,8 @@ public class AccountSteps {
 	double del = 0;
 	KnowsTheDomain helper;
 
-	public AccountSteps() {
-		helper = new KnowsTheDomain();
+	public AccountSteps(KnowsTheDomain helper) {
+		this.helper = helper;
 	}
 
 	/*@ParameterType(".*")
@@ -43,7 +43,7 @@ public class AccountSteps {
 	//public void myAccountHasBeenCredited(String account, @Transform(MoneyConverter.class) Money creditAmount) throws Throwable {
         System.out.println("################################ <Step - @GIVEN> - Account should be there: " + helper.getMyAccount());
         helper.getMyAccount().credit(deposit);
-		System.out.println("################################ <Step - @GIVEN> - Account and amount to add has been written to Msg Queue - wait pit to be processed. " + helper.getMyAccount());
+		System.out.println("################################ <Step - @GIVEN> - Account and amount to add has been written to Msg Queue - wait for it to be processed. " + helper.getMyAccount());
 		//Money dbAccountBalance = helper.getMyAccount().getAccountBalance();
 		//Assert.assertTrue("Incorrect account balance, expected: " + deposit + ", but actual was: " + dbAccountBalance, (deposit == dbAccountBalance));
 	}
@@ -90,11 +90,17 @@ public class AccountSteps {
 		int timeoutMilliSecs = 3000;
 		int pollIntervalMilliSecs = 100;
 
+		System.out.println("[@THEN] > 1. About to enter While() > Get Account Balance: ");
 		while (!helper.getMyAccount().getAccountBalance().equals(accountBalance)
 				&& timeoutMilliSecs > 0){
 			Thread.sleep(pollIntervalMilliSecs);
 			timeoutMilliSecs -= pollIntervalMilliSecs;
+			System.out.println("[@THEN] > 2. While() > Get Account Balance: " + helper.getMyAccount().getAccountBalance() +
+					" and Compare to account balance (parm): " + accountBalance);
 		}
+
+		System.out.println("[@THEN] > 3. Get Account Balance: " + helper.getMyAccount().getAccountBalance() +
+				" and Compare to account balance (parm): " + accountBalance);
 
 		//int actualAmount = helper.getMyAccount().getAccountBalance().getDollars();
 		Money actualAccountBalance = helper.getMyAccount().getAccountBalance();

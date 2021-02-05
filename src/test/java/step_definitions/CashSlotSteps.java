@@ -10,7 +10,7 @@ public class CashSlotSteps {
     double del = 0;
     KnowsTheDomain helper;
 
-    public CashSlotSteps() {
-        helper = new KnowsTheDomain();
+    public CashSlotSteps(KnowsTheDomain helper) {
+        this.helper = helper;
     }
 }
